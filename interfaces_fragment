@@ -1,0 +1,12 @@
+
+# Label Added By schof-alr-aio
+auto eth2
+iface eth2 inet manual
+
+auto br-mgmt
+iface br-mgmt inet static
+	address 10.51.50.1
+	netmask 255.255.255.0
+	bridge_ports eth2
+	bridge_stp off
+	bridge_fd 0

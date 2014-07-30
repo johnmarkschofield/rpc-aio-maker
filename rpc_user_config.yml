@@ -1,0 +1,27 @@
+---
+# User defined CIDR used for containers
+cidr: 10.51.50.1/24
+
+infra_hosts:
+  infra1:
+    ip: 10.51.50.1
+
+compute_hosts:
+  infra1:
+    ip: 10.51.50.1
+
+storage_hosts:
+  infra1:
+    ip: 10.51.50.1
+
+log_hosts:
+  infra1:
+    ip: 10.51.50.1
+
+network_hosts:
+  infra1:
+    ip: 10.51.50.1
+
+haproxy_hosts:
+  infra1:
+    ip: 10.51.50.1
