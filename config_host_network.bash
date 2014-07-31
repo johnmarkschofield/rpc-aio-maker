@@ -3,6 +3,7 @@
 set -e
 set -o pipefail
 set -x
+source cloudenv
 
 ssh root@$PUBLIC_IP cp /etc/network/interfaces /etc/network/interfaces.original
 

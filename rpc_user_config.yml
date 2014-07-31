@@ -1,6 +1,6 @@
 ---
 # User defined CIDR used for containers
-cidr: 10.51.50.1/24
+cidr: 10.51.50.0/24
 
 infra_hosts:
   infra1:

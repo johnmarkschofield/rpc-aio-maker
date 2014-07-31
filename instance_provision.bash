@@ -3,6 +3,7 @@
 set -e
 set -o pipefail
 set -x
+source cloudenv
 
 # Ubuntu 14.04 LTS (Trusty Tahr) (PVHVM)
 
@@ -19,10 +20,8 @@ export PUBLIC_IP=`nova show $SERVERNAME | grep "public network" | awk '{print $6
 sed -i .bak "s|export PUBLIC_IP=.*|export PUBLIC_IP=$PUBLIC_IP|g" ./cloudenv
 rm cloudenv.bak
 
-# We do an SSD volume for greater speed. Omit the --volume-type line if you want SATA.
-nova volume-create 250 \
-	--display-name $LXC_VOLUME_NAME \
-	--volume-type 8a4e0d56-b904-44f7-b4bc-8b065729136b
+nova volume-create $EXTERNAL_VOLUME_GB \
+	--display-name $LXC_VOLUME_NAME
 
 export LXC_VOLUME_ID=`nova volume-show $LXC_VOLUME_NAME | grep  -E '\| id\W*\|' | awk '{print $4}'`
 sed -i .bak "s|export LXC_VOLUME_ID=.*|export LXC_VOLUME_ID=$LXC_VOLUME_ID|g" ./cloudenv

@@ -3,9 +3,9 @@
 set -e
 set -o pipefail
 set -x
+source cloudenv
 
-
-ssh root@$PUBLIC_IP "apt-get update"
+ssh -o StrictHostKeyChecking=no root@$PUBLIC_IP "apt-get update"
 ssh root@$PUBLIC_IP "DEBIAN_FRONTEND=noninteractive apt-get install -q -y update-notifier-common"
 ssh root@$PUBLIC_IP "DEBIAN_FRONTEND=noninteractive apt-get -q -y dist-upgrade"
 ssh root@$PUBLIC_IP "test -e /var/run/reboot-required && reboot || true"
@@ -24,8 +24,8 @@ ssh root@$PUBLIC_IP "DEBIAN_FRONTEND=noninteractive apt-get -q -y install bridge
 # Build Requirements
 ssh root@$PUBLIC_IP "DEBIAN_FRONTEND=noninteractive apt-get -q -y install git aptitude python-dev python-setuptools"
 
-# Not-crappy editors
-ssh root@$PUBLIC_IP "DEBIAN_FRONTEND=noninteractive apt-get -q -y install emacs24-nox vim"
+# Not-crappy editors + tools
+ssh root@$PUBLIC_IP "DEBIAN_FRONTEND=noninteractive apt-get -q -y install emacs24-nox vim tmux"
 
 # Get modern pip
 ssh root@$PUBLIC_IP "easy_install pip"

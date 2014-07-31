@@ -3,7 +3,7 @@
 set -e
 set -o pipefail
 set -x
-
+source cloudenv
 
 while [ `ssh root@$PUBLIC_IP 'fdisk -l | grep "Disk /dev/"  | wc -l'` -ne 3 ]; do
 	 sleep 5
