@@ -33,7 +33,6 @@ git clone $GIT_URL -b $GIT_BRANCH /opt/ansible-lxc-rpc
 
 pip install --upgrade -r /opt/ansible-lxc-rpc/requirements.txt
 
-rm -rf /etc/rpc_deploy
 cp -R /opt/ansible-lxc-rpc/etc/rpc_deploy /etc/rpc_deploy
 
 cp /root/rpc_user_config.yml /etc/rpc_deploy/
