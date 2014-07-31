@@ -32,7 +32,7 @@ You'll need to edit the config variables in cloudenv.
 ./instance_provision.bash # Takes about 7-8 minutes.
 source cloudenv
 ssh $PUBLIC_IP
-/root/install_openstack.bash # 22 minutes + 16min + 
+/root/install_openstack.bash # Takes about 66 minutes
 ```
 
 
