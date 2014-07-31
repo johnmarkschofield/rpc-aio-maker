@@ -4,7 +4,7 @@ set -e
 set -o pipefail
 set -x
 
-./instance_provision.bash
+./provision_instance.bash
 ./config_host_packages.bash
 ./config_host_drives.bash
 ./config_host_network.bash
