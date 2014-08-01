@@ -50,13 +50,28 @@ cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
 
 sed -i "s/^lb_vip_address:.*/lb_vip_address: 10.51.50.1/" /opt/ansible-lxc-rpc/rpc_deployment/vars/user_variables.yml
 
+
 run_playbook playbooks/setup/host-setup.yml
 run_playbook playbooks/setup/build-containers.yml
 run_playbook playbooks/setup/restart-containers.yml
 run_playbook playbooks/setup/it-puts-common-bits-on-disk.yml
 
+GALERA_CONTAINER="$(lxc-ls | awk '/galera/ {print $1}')"
+set +e
+if [ -f "/openstack/$GALERA_CONTAINER/galera.cache" ]; then
+	set -e
+	run_playbook playbooks/infrastructure/galera-bootstrap.yml
+	run_playbook playbooks/infrastructure/galera-config.yml
+	run_playbook playbooks/infrastructure/galera-startup.yml
+	set +e
+else
+	set -e
+	run_playbook playbooks/infrastructure/galera-install.yml
+	set +e
+fi
+set -e
+
 run_playbook playbooks/infrastructure/memcached.yml
-run_playbook playbooks/infrastructure/galera-install.yml
 run_playbook playbooks/infrastructure/rabbit-install.yml
 run_playbook playbooks/infrastructure/rsyslog-install.yml
 run_playbook playbooks/infrastructure/elasticsearch-install.yml
