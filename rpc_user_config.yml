@@ -1,6 +1,10 @@
 ---
-# User defined CIDR used for containers
-cidr: 10.51.50.0/24
+mgmt_cidr: 10.51.50.0/24
+vmnet_cidr: 192.168.20.0/24
+
+global_overrides:
+  internal_lb_vip_address: 10.51.50.1
+  external_lb_vip_address: 10.51.50.1
 
 infra_hosts:
   infra1:

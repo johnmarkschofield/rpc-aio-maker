@@ -8,6 +8,7 @@ source cloudenv
 ssh root@$PUBLIC_IP cp /etc/network/interfaces /etc/network/interfaces.original
 
 ssh root@$PUBLIC_IP "sed -i '/# Label '$MGMT_NETWORK_NAME'/,\$d' /etc/network/interfaces"
+ssh root@$PUBLIC_IP "sed -i '/# Label '$VMNET_NETWORK_NAME'/,\$d' /etc/network/interfaces"
 ssh root@$PUBLIC_IP "echo >> /etc/network/interfaces"
 ssh root@$PUBLIC_IP "echo \"# Label $MGMT_NETWORK_NAME\" >> /etc/network/interfaces"
 

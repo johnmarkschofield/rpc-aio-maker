@@ -10,6 +10,3 @@ set -x
 ./config_host_network.bash
 ./prepare_for_openstack.bash
 
-echo
-echo
-echo "Done with make_it_all.bash"

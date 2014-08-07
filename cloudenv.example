@@ -1,19 +1,24 @@
-OS_USERNAME=MYCLOUD_ACCOUNT_NAME
-OS_TENANT_NAME=MYCLOUD_ACCOUNT_NUMBER
+# Either fill in this section, or delete it and use your existing cloudrc file.
+OS_USERNAME=Username
+OS_TENANT_NAME=account number
 OS_AUTH_SYSTEM=rackspace
-OS_PASSWORD=MYCLOUD_API_KEY
+OS_PASSWORD=API key
 OS_AUTH_URL=https://identity.api.rackspacecloud.com/v2.0/
-OS_REGION_NAME=DFW # Change if you wish
+OS_REGION_NAME=DFW
 OS_NO_CACHE=1
 export OS_USERNAME OS_TENANT_NAME OS_AUTH_SYSTEM OS_PASSWORD OS_AUTH_URL OS_REGION_NAME OS_NO_CACHE
 
 # Config Options -- Edit These
-export SERVERNAME=example-aio
-export LXC_VOLUME_NAME=example-aio-lxc
-export KEYPAIR_NAME=KEYPAIR_NAME
-export MGMT_NETWORK_NAME=NETWORK_NAME
-export MGMT_NETWORK_ID=NETWORK_ID
+export SERVERNAME=YOURNICKNAME-aio
+export LXC_VOLUME_NAME=YOURNICKNAME-aio-lxc
+export KEYPAIR_NAME=YOUR KEYNAME
+export MGMT_NETWORK_NAME=development
+export MGMT_NETWORK_ID=792e2b5a-a072-414b-8d45-e88faadef3f6
+export EXTERNAL_VOLUME_GB=1000
+export GIT_URL=https://github.com/johnmarkschofield/ansible-lxc-rpc.git
+export GIT_BRANCH=non-blocking-io-for-subprocess
 
 # Automatically Generated -- Don't Edit these
-export PUBLIC_IP=FOO
-export LXC_VOLUME_ID=BAR
+export PUBLIC_IP=23.253.249.160
+export SRVR=$PUBLIC_IP
+export LXC_VOLUME_ID=534952f0-f1eb-47af-89d9-f7382d5ad642
