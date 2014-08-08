@@ -5,17 +5,11 @@ set -o pipefail
 set -x
 source cloudenv
 
-ssh root@$PUBLIC_IP cp /etc/network/interfaces /etc/network/interfaces.original
+ssh root@$PUBLIC_IP cp /etc/network/interfaces /etc/network/interfaces.original.`date +%Y-%m-%d_%H-%M-%S-%N`
 
-ssh root@$PUBLIC_IP "sed -i '/# Label '$MGMT_NETWORK_NAME'/,\$d' /etc/network/interfaces"
-ssh root@$PUBLIC_IP "sed -i '/# Label '$VMNET_NETWORK_NAME'/,\$d' /etc/network/interfaces"
-ssh root@$PUBLIC_IP "echo >> /etc/network/interfaces"
-ssh root@$PUBLIC_IP "echo \"# Label $MGMT_NETWORK_NAME\" >> /etc/network/interfaces"
-
-
-scp interfaces_fragment root@$PUBLIC_IP:~
-ssh root@$PUBLIC_IP "cat /root/interfaces_fragment >> /etc/network/interfaces"
-ssh root@$PUBLIC_IP rm /root/interfaces_fragment
+scp interfaces_mungerator.py root@$PUBLIC_IP:~
+scp cloudenv root@$PUBLIC_IP:~
+ssh root@$PUBLIC_IP "source /root/cloudenv ; python /root/interfaces_mungerator.py"
 
 ssh root@$PUBLIC_IP reboot
 set +e

@@ -43,10 +43,10 @@ You'll need to edit the config variables in cloudenv.
 ## Installing
 
 ```
-./make_it_all.bash # Takes about 7-8 minutes.
+time ./make_it_all.bash # Takes about 7-8 minutes.
 source cloudenv
 ssh $PUBLIC_IP
-/root/install_openstack.bash # Takes about 174 minutes
+time /bin/bash /root/install_openstack.bash # Takes about 64 minutes
 ```
 
 
