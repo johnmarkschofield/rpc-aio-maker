@@ -16,7 +16,10 @@ git clone $GIT_URL -b $GIT_BRANCH /opt/ansible-lxc-rpc
 cp -R /opt/ansible-lxc-rpc/etc/rpc_deploy /etc/rpc_deploy
 cp /root/rpc_user_config.yml /etc/rpc_deploy/
 grep -q -E "^lb_vip_address" $USERVARFILE || echo -e "\n\nlb_vip_address: 10.51.50.1" >> $USERVARFILE
-sed -i "s|glance_swift_store_auth_address:.*|glance_swift_store_auth_address: https://{{ lb_vip_address }}/v2.0|g" $USERVARFILE
+# Not needed not using glance
+#sed -i "s|glance_swift_store_auth_address:.*|glance_swift_store_auth_address: https://{{ lb_vip_address }}/v2.0|g" $USERVARFILE
+sed -i "s|glance_default_store:.*|glance_default_store: file|g" $USERVARFILE
+
 # Install requirements
 pip install -r /opt/ansible-lxc-rpc/requirements.txt
 
