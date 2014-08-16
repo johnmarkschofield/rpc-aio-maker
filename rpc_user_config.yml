@@ -5,7 +5,27 @@ vmnet_cidr: 192.168.20.0/24
 global_overrides:
   internal_lb_vip_address: 10.51.50.1
   external_lb_vip_address: 10.51.50.1
-
+  tunnel_bridge: "br-vmnet"
+  container_bridge: "br-mgmt"
+  # Define your neutron netowrks.
+  neutron_provider_networks:
+    - network:
+        container_bridge: "br-vmnet"
+        container_interface: "eth2"
+        type: "vxlan"
+        range: "1:1000"
+        net_name: "vmnet"
+    - network:
+        container_bridge: "br-ext"
+        container_interface: "eth3"
+        type: "flat"
+        net_name: "extnet"
+    - network:
+        container_bridge: "br-ext"
+        container_interface: "eth3"
+        type: "vlan"
+        range: "1:1"
+        net_name: "extnet"
 infra_hosts:
   infra1:
     ip: 10.51.50.1
@@ -17,6 +37,13 @@ compute_hosts:
 storage_hosts:
   infra1:
     ip: 10.51.50.1
+    # container_vars:
+    #   cinder_backends:
+    #     limit_container_types: cinder_volume
+    #     lvm:
+    #       volume_group: cinder-volumes
+    #       driver: cinder.volume.drivers.lvm.LVMISCSIDriver
+    #       backend_name: LVM_iSCSI
 
 log_hosts:
   infra1:

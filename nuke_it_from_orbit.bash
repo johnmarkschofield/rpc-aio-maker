@@ -39,20 +39,3 @@ while there_are_things_to_delete ; do
     nova network-delete $VMNET_NETWORK_ID
     sleep 10
 done
-
-
-if nova list | grep $NICKNAME ; then
-    echo "ERROR: Server not deleted."
-    exit 10
-fi
-
-if nova volume-list | grep $NICKNAME ; then
-    echo "ERROR: Volume not deleted"
-    exit 10
-fi
-
-if nova network-list | grep $NICKNAME ; then
-    echo "ERROR: Network not deleted"
-    exit 10
-fi
-
