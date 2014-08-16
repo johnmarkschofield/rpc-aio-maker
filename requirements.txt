@@ -12,6 +12,6 @@ rackspace-novaclient==1.4
 rax-default-network-flags-python-novaclient-ext==0.2.4
 rax-scheduled-images-python-novaclient-ext==0.2.2
 requests==2.3.0
-simplejson==3.6.0
+simplejson==3.6.2
 six==1.7.3
 wsgiref==0.1.2
