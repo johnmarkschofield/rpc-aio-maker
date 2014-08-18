@@ -1,24 +1,40 @@
 # Either fill in this section, or delete it and use your existing cloudrc file.
-OS_USERNAME=Username
-OS_TENANT_NAME=account number
+OS_USERNAME=USERNAME
+OS_TENANT_NAME=ACCOUNT NUMBER
 OS_AUTH_SYSTEM=rackspace
-OS_PASSWORD=API key
+OS_PASSWORD=API KEY
 OS_AUTH_URL=https://identity.api.rackspacecloud.com/v2.0/
 OS_REGION_NAME=DFW
 OS_NO_CACHE=1
 export OS_USERNAME OS_TENANT_NAME OS_AUTH_SYSTEM OS_PASSWORD OS_AUTH_URL OS_REGION_NAME OS_NO_CACHE
 
 # Config Options -- Edit These
-export SERVERNAME=YOURNICKNAME-aio
-export LXC_VOLUME_NAME=YOURNICKNAME-aio-lxc
-export KEYPAIR_NAME=YOUR KEYNAME
-export MGMT_NETWORK_NAME=development
-export MGMT_NETWORK_ID=792e2b5a-a072-414b-8d45-e88faadef3f6
-export EXTERNAL_VOLUME_GB=1000
-export GIT_URL=https://github.com/johnmarkschofield/ansible-lxc-rpc.git
-export GIT_BRANCH=non-blocking-io-for-subprocess
+
+export NICKNAME=YOUR_IRC_ID_OR_WHATEVER
+export KEYPAIR_NAME=YOUR_KEYPAIR_NAME
+
+# Probably don't need to edit these.
+
+export AIONAME=$NICKNAME-aio
+
+export SERVERNAME=${AIONAME}
+export LVM_VOLUME_NAME=${AIONAME}-lxc
+export MGMT_NETWORK_NAME=${AIONAME}-mgmt
+export VMNET_NETWORK_NAME=${AIONAME}-vmnet
+
+export GIT_URL=git@github.com:rcbops/ansible-lxc-rpc.git
+export GIT_BRANCH=master
+
+export HOST_FLAVOR=performance1-8
+
+
+export LVM_VOLUME_GB=500
+export BOOTIMAGE=255df5fb-e3d4-45a3-9a07-c976debf7c14 # Ubuntu 14.04 LTS (Trusty Tahr) (PVHVM)
+export LVM_VOLUME_TYPE=8a4e0d56-b904-44f7-b4bc-8b065729136b # SSD
 
 # Automatically Generated -- Don't Edit these
-export PUBLIC_IP=23.253.249.160
+export PUBLIC_IP=23.253.246.180
 export SRVR=$PUBLIC_IP
-export LXC_VOLUME_ID=534952f0-f1eb-47af-89d9-f7382d5ad642
+export LVM_VOLUME_ID=ec1e1f4e-1e11-44e7-9b39-508c3844f75e
+export MGMT_NETWORK_ID=c2c68fec-a00e-4a25-ac44-134092005c56
+export VMNET_NETWORK_ID=c5fbf315-261b-4726-b348-7b0aee949f03
