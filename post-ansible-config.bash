@@ -39,3 +39,5 @@ nova boot \
     cirrostest1
 
 
+##### on neutron-agents-container:
+ip netns exec qdhcp-975c4316-ade8-4402-b475-7492bcfc3a4c iptables -A POSTROUTING -t mangle -p udp --dport 68 -j CHECKSUM --checksum-fill
