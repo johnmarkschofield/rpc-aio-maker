@@ -2,6 +2,8 @@
 
 set -e
 set -o pipefail
+set -u
+source cloudenv
 set -x
 
 ./provision_instance.bash

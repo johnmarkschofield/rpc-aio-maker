@@ -1,8 +1,10 @@
+#!/bin/bash
 
 set -e
 set -o pipefail
+set -u
+source cloudenv
 set -x
-source /root/cloudenv
 
 USERVARFILE=/opt/ansible-lxc-rpc/rpc_deployment/vars/user_variables.yml
 
@@ -31,4 +33,4 @@ cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
 
 
 # Run openstack installer
-/usr/bin/python /opt/ansible-lxc-rpc/tools/install.py --no-haproxy --galera --rabbit --retries=3
+/usr/bin/python /opt/ansible-lxc-rpc/tools/install.py --haproxy --galera --rabbit --retries=3

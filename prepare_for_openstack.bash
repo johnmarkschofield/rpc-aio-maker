@@ -2,8 +2,9 @@
 
 set -e
 set -o pipefail
-set -x
+set -u
 source cloudenv
+set -x
 
 
 scp install_openstack.bash root@$PUBLIC_IP:~

@@ -2,8 +2,9 @@
 
 set -e
 set -o pipefail
-set -x
+set -u
 source cloudenv
+set -x
 
 ssh -o StrictHostKeyChecking=no root@$PUBLIC_IP "apt-get update"
 ssh root@$PUBLIC_IP "DEBIAN_FRONTEND=noninteractive apt-get install -q -y update-notifier-common"

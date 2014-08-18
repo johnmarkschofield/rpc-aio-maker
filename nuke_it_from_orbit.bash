@@ -1,25 +1,21 @@
 #!/bin/bash
 
+set -o pipefail
+set -u
 source cloudenv
-
 set -x
 
 
-
 there_are_things_to_delete(){
-    if nova list | grep $SERVERNAME ; then
+    if nova list | grep ${AIONAME} ; then
         return 0
     fi
 
-    if nova volume-list | grep $LXC_VOLUME_NAME ; then
+    if nova volume-list | grep ${AIONAME} ; then
         return 0
     fi 
 
-    if nova network-list | grep $MGMT_NETWORK_NAME ; then
-        return 0
-    fi
-
-    if nova network-list | grep $VMNET_NETWORK_NAME ; then
+    if nova network-list | grep ${AIONAME} ; then
         return 0
     fi
 
@@ -29,13 +25,23 @@ there_are_things_to_delete(){
 
 
 while there_are_things_to_delete ; do
-    echo "Removing all AIO elements associated with $SERVERNAME"
-    nova stop $SERVERNAME
-    nova volume-detach $SERVERNAME $LXC_VOLUME_ID
-    sleep 15
-    nova delete $SERVERNAME
-    nova volume-delete $LXC_VOLUME_NAME
-    nova network-delete $MGMT_NETWORK_ID
-    nova network-delete $VMNET_NETWORK_ID
-    sleep 10
+    echo "Removing all elements associated with $AIONAME"
+
+
+    if nova list | grep $AIONAME ; then
+        echo "Deleting servers..."
+        nova delete $SERVERNAME
+    fi
+
+    if nova volume-list | grep $AIONAME ; then        
+        echo "Deleting volumes..."
+        nova volume-delete $LVM_VOLUME_ID
+    fi
+
+    if nova network-list | grep $AIONAME ; then
+        echo "Deleting networks..."
+        nova network-delete $MGMT_NETWORK_ID
+        nova network-delete $VMNET_NETWORK_ID
+    fi
+
 done

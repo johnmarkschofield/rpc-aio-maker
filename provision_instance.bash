@@ -2,6 +2,7 @@
 
 set -e
 set -o pipefail
+set -u
 source cloudenv
 set -x
 
@@ -19,7 +20,7 @@ rm cloudenv.bak
 
 
 nova boot \
-	--flavor performance1-8 \
+	--flavor $HOST_FLAVOR \
 	--image $BOOTIMAGE \
     --nic net-id=$MGMT_NETWORK_ID \
     --nic net-id=$VMNET_NETWORK_ID \
@@ -32,16 +33,12 @@ export PUBLIC_IP=`nova show $SERVERNAME | grep "public network" | grep -oh -E "\
 sed -i .bak "s|export PUBLIC_IP=.*|export PUBLIC_IP=$PUBLIC_IP|g" ./cloudenv
 rm cloudenv.bak
 
-nova volume-create $EXTERNAL_VOLUME_GB \
-	--display-name $LXC_VOLUME_NAME \
-    --volume-type $LXC_VOLUME_TYPE
+nova volume-create $LVM_VOLUME_GB \
+	--display-name $LVM_VOLUME_NAME \
+    --volume-type $LVM_VOLUME_TYPE
 
-export LXC_VOLUME_ID=`nova volume-show $LXC_VOLUME_NAME | grep  -E '\| id\W*\|' | awk '{print $4}'`
-sed -i .bak "s|export LXC_VOLUME_ID=.*|export LXC_VOLUME_ID=$LXC_VOLUME_ID|g" ./cloudenv
+export LVM_VOLUME_ID=`nova volume-show $LVM_VOLUME_NAME | grep  -E '\| id\W*\|' | awk '{print $4}'`
+sed -i .bak "s|export LVM_VOLUME_ID=.*|export LVM_VOLUME_ID=$LVM_VOLUME_ID|g" ./cloudenv
 rm cloudenv.bak
 
-nova volume-attach $SERVERNAME $LXC_VOLUME_ID
-
-echo
-echo
-echo "Don't forget to source cloudenv now."
+nova volume-attach $SERVERNAME $LVM_VOLUME_ID

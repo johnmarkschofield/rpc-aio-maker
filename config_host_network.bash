@@ -2,8 +2,9 @@
 
 set -e
 set -o pipefail
-set -x
+set -u
 source cloudenv
+set -x
 
 ssh root@$PUBLIC_IP cp /etc/network/interfaces /etc/network/interfaces.original.`date +%Y-%m-%d_%H-%M-%S-%N`
 
