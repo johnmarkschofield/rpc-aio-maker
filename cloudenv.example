@@ -34,7 +34,6 @@ export LVM_VOLUME_TYPE=8a4e0d56-b904-44f7-b4bc-8b065729136b # SSD
 
 # Automatically Generated -- Don't Edit these
 export PUBLIC_IP=23.253.246.180
-export SRVR=$PUBLIC_IP
 export LVM_VOLUME_ID=ec1e1f4e-1e11-44e7-9b39-508c3844f75e
 export MGMT_NETWORK_ID=c2c68fec-a00e-4a25-ac44-134092005c56
 export VMNET_NETWORK_ID=c5fbf315-261b-4726-b348-7b0aee949f03
