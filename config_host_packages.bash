@@ -6,7 +6,11 @@ set -u
 source cloudenv
 set -x
 
-ssh -o StrictHostKeyChecking=no root@$PUBLIC_IP "apt-get update"
+ssh -o StrictHostKeyChecking=no root@$PUBLIC_IP "true"
+
+ssh root@$PUBLIC_IP "echo deb [arch=amd64] http://dc0e2a2ef0676c3453b1-31bb9324d3aeab0d08fa434012c1e64d.r5.cf1.rackcdn.com LA main > /etc/apt/sources.list"
+ssh root@$PUBLIC_IP "curl http://dc0e2a2ef0676c3453b1-31bb9324d3aeab0d08fa434012c1e64d.r5.cf1.rackcdn.com/repo.gpg | apt-key add -"
+ssh root@$PUBLIC_IP "apt-get update"
 ssh root@$PUBLIC_IP "DEBIAN_FRONTEND=noninteractive apt-get install -q -y update-notifier-common"
 ssh root@$PUBLIC_IP "DEBIAN_FRONTEND=noninteractive apt-get -q -y dist-upgrade"
 ssh root@$PUBLIC_IP "test -e /var/run/reboot-required && reboot || true"
