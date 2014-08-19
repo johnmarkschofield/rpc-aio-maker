@@ -5,23 +5,23 @@ vmnet_cidr: 192.168.20.0/24
 global_overrides:
   internal_lb_vip_address: 10.51.50.1
   external_lb_vip_address: 10.51.50.1
-  tunnel_bridge: "br-vmnet"
+  tunnel_bridge: "br-vxlan"
   container_bridge: "br-mgmt"
   # Define your neutron netowrks.
   neutron_provider_networks:
     - network:
-        container_bridge: "br-vmnet"
+        container_bridge: "br-vxlan"
         container_interface: "eth2"
         type: "vxlan"
         range: "1:1000"
         net_name: "vmnet"
     - network:
-        container_bridge: "br-ext"
+        container_bridge: "br-vlan"
         container_interface: "eth3"
         type: "flat"
         net_name: "extnet"
     - network:
-        container_bridge: "br-ext"
+        container_bridge: "br-vlan"
         container_interface: "eth3"
         type: "vlan"
         range: "1:1"
