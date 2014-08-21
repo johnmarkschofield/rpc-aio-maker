@@ -70,10 +70,6 @@ sed -i "s|nova_s3_service_password:.*|nova_s3_service_password: `pwgen 32 1`|g" 
 
 sed -i "s|rpc_support_holland_password:.*|rpc_support_holland_password: `pwgen 32 1`|g" $USERVARFILE
 
-# Think this isn't needed.
-#grep -q -E "^lb_vip_address" $USERVARFILE || echo -e "\n\nlb_vip_address: 10.51.50.1" >> $USERVARFILE
-
-
 
 
 # Install requirements
