@@ -26,51 +26,10 @@ sed -i "s|rackspace_cloud_username:.*|rackspace_cloud_username: $OS_USERNAME|g" 
 sed -i "s|rackspace_cloud_password:.*|rackspace_cloud_password: $RACKSPACE_LOGIN_PW|g" $USERVARFILE
 sed -i "s|rackspace_cloud_api_key:.*|rackspace_cloud_api_key: $OS_PASSWORD|g" $USERVARFILE
 
-sed -i "s|rabbitmq_password:.*|rabbitmq_password: `pwgen 32 1`|g" $USERVARFILE
-sed -i "s|rabbitmq_cookie_token:.*|rabbitmq_cookie_token: `pwgen 32 1`|g" $USERVARFILE
-
-sed -i "s|memcached_encryption_key:.*|memcached_encryption_key: `pwgen 32 1`|g" $USERVARFILE
-
-sed -i "s|container_openstack_password:.*|container_openstack_password: `pwgen 32 1`|g" $USERVARFILE
-
-sed -i "s|mysql_root_password:.*|mysql_root_password: `pwgen 32 1`|g" $USERVARFILE
-sed -i "s|mysql_debian_sys_maint_password:.*|mysql_debian_sys_maint_password: `pwgen 32 1`|g" $USERVARFILE
-
-sed -i "s|keystone_container_mysql_password:.*|keystone_container_mysql_password: `pwgen 32 1`|g" $USERVARFILE
-sed -i "s|keystone_auth_admin_token:.*|keystone_auth_admin_token: `pwgen 32 1`|g" $USERVARFILE
-sed -i "s|keystone_auth_admin_password:.*|keystone_auth_admin_password: `pwgen 32 1`|g" $USERVARFILE
-sed -i "s|keystone_service_password:.*|keystone_service_password: `pwgen 32 1`|g" $USERVARFILE
-
-sed -i "s|cinder_container_mysql_password:.*|cinder_container_mysql_password: `pwgen 32 1`|g" $USERVARFILE
-sed -i "s|cinder_service_password:.*|cinder_service_password: `pwgen 32 1`|g" $USERVARFILE
-sed -i "s|cinder_v2_service_password:.*|cinder_v2_service_password: `pwgen 32 1`|g" $USERVARFILE
-
 sed -i "s|glance_default_store:.*|glance_default_store: file|g" $USERVARFILE
-sed -i "s|glance_container_mysql_password:.*|glance_container_mysql_password: `pwgen 32 1`|g" $USERVARFILE
-sed -i "s|glance_service_password:.*|glance_service_password: `pwgen 32 1`|g" $USERVARFILE
-
-sed -i "s|heat_stack_domain_admin_password:.*|heat_stack_domain_admin_password: `pwgen 32 1`|g" $USERVARFILE
-sed -i "s|heat_container_mysql_password:.*|heat_container_mysql_password: `pwgen 32 1`|g" $USERVARFILE
-sed -i "s|heat_service_password:.*|heat_service_password: `pwgen 32 1`|g" $USERVARFILE
-sed -i "s|heat_cfn_service_password:.*|heat_cfn_service_password: `pwgen 32 1`|g" $USERVARFILE
-
 sed -i "s|maas_notification_plan:.*|maas_notification_plan: $ADMIN_EMAIL|g" $USERVARFILE
-sed -i "s|maas_agent_token:.*|maas_agent_token: `pwgen 32 1`|g" $USERVARFILE
-sed -i "s|maas_keystone_password:.*|maas_keystone_password: `pwgen 32 1`|g" $USERVARFILE
 
-sed -i "s|neutron_container_mysql_password:.*|neutron_container_mysql_password: `pwgen 32 1`|g" $USERVARFILE
-sed -i "s|neutron_service_password:.*|neutron_service_password: `pwgen 32 1`|g" $USERVARFILE
-
-sed -i "s|nova_container_mysql_password:.*|nova_container_mysql_password: `pwgen 32 1`|g" $USERVARFILE
-sed -i "s|nova_metadata_proxy_secret:.*|nova_metadata_proxy_secret: `pwgen 32 1`|g" $USERVARFILE
-sed -i "s|nova_ec2_service_password:.*|nova_ec2_service_password: `pwgen 32 1`|g" $USERVARFILE
-sed -i "s|nova_service_password:.*|nova_service_password: `pwgen 32 1`|g" $USERVARFILE
-sed -i "s|nova_v3_service_password:.*|nova_v3_service_password: `pwgen 32 1`|g" $USERVARFILE
-sed -i "s|nova_s3_service_password:.*|nova_s3_service_password: `pwgen 32 1`|g" $USERVARFILE
-
-sed -i "s|rpc_support_holland_password:.*|rpc_support_holland_password: `pwgen 32 1`|g" $USERVARFILE
-
-
+python /opt/ansible-lxc-rpc/scripts/pw-token-gen.py --file $USERVARFILE
 
 # Install requirements
 pip install -r /opt/ansible-lxc-rpc/requirements.txt
