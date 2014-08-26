@@ -11,6 +11,7 @@ ssh -o StrictHostKeyChecking=no root@$PUBLIC_IP "true"
 
 ssh root@$PUBLIC_IP "cp /etc/apt/sources.list /etc/apt/sources.list.original"
 ssh root@$PUBLIC_IP "echo deb [arch=amd64] http://dc0e2a2ef0676c3453b1-31bb9324d3aeab0d08fa434012c1e64d.r5.cf1.rackcdn.com LA main > /etc/apt/sources.list"
+ssh root@$PUBLIC_IP "echo deb [arch=amd64] http://dc0e2a2ef0676c3453b1-31bb9324d3aeab0d08fa434012c1e64d.r5.cf1.rackcdn.com universe-LA universe >> /etc/apt/sources.list"
 ssh root@$PUBLIC_IP "curl http://dc0e2a2ef0676c3453b1-31bb9324d3aeab0d08fa434012c1e64d.r5.cf1.rackcdn.com/repo.gpg | apt-key add -"
 
 ssh root@$PUBLIC_IP "apt-get update"
