@@ -18,6 +18,7 @@ git clone $GIT_URL -b $GIT_BRANCH /opt/ansible-lxc-rpc
 # Set up config dir
 cp -R /opt/ansible-lxc-rpc/etc/rpc_deploy /etc/rpc_deploy
 cp /root/rpc_user_config.yml /etc/rpc_deploy/
+sed -i "s|^environment_version:.*$|environment_version: `md5sum /etc/rpc_deploy/rpc_environment.yml | awk '{print $1}'`|g" /etc/rpc_deploy/rpc_user_config.yml
 
 # Change user_variables.yml
 sed -i "s|rackspace_cloud_auth_url:.*|rackspace_cloud_auth_url: $OS_AUTH_URL|g" $USERVARFILE

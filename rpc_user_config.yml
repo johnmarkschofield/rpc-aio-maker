@@ -1,6 +1,17 @@
 ---
-mgmt_cidr: 10.51.50.0/24
-vmnet_cidr: 192.168.20.0/24
+
+environment_version: FOO
+# User defined CIDR used for containers
+# Global cidr/s used for everything.
+cidr_networks:
+  # Cidr used in the Management network
+  container: 172.29.236.0/22
+  # Cidr used in the Service network
+  snet: 172.29.248.0/22
+  # Cidr used in the VM network
+  tunnel: 172.29.240.0/22
+  # Cidr used in the Storage network
+  storage: 172.29.244.0/22
 
 global_overrides:
   internal_lb_vip_address: 10.51.50.1
