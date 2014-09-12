@@ -156,3 +156,7 @@ log_hosts:
 network_hosts:
   infra1:
     ip: 172.24.240.100
+
+haproxy_hosts:
+  infra1:
+    ip: 172.24.240.100
