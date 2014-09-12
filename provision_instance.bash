@@ -8,14 +8,19 @@ set -x
 
 
 # Create networks
-nova network-create $MGMT_NETWORK_NAME 10.51.50.0/24
+nova network-create $MGMT_NETWORK_NAME 172.24.240.0/22
 export MGMT_NETWORK_ID=`nova network-list | grep $MGMT_NETWORK_NAME | awk '{print $2}'`
 sed -i .bak "s|export MGMT_NETWORK_ID=.*|export MGMT_NETWORK_ID=$MGMT_NETWORK_ID|g" ./cloudenv
 rm cloudenv.bak
 
-nova network-create $VMNET_NETWORK_NAME 192.168.20.0/24
-export VMNET_NETWORK_ID=`nova network-list | grep $VMNET_NETWORK_NAME | awk '{print $2}'`
-sed -i .bak "s|export VMNET_NETWORK_ID=.*|export VMNET_NETWORK_ID=$VMNET_NETWORK_ID|g" ./cloudenv
+nova network-create $VXLAN_NETWORK_NAME 172.24.236.0/22
+export VXLAN_NETWORK_ID=`nova network-list | grep $VXLAN_NETWORK_NAME | awk '{print $2}'`
+sed -i .bak "s|export VXLAN_NETWORK_ID=.*|export VXLAN_NETWORK_ID=$VXLAN_NETWORK_ID|g" ./cloudenv
+rm cloudenv.bak
+
+nova network-create $STORAGE_NETWORK_NAME 172.24.244.0/22
+export STORAGE_NETWORK_ID=`nova network-list | grep $STORAGE_NETWORK_NAME | awk '{print $2}'`
+sed -i .bak "s|export STORAGE_NETWORK_ID=.*|export STORAGE_NETWORK_ID=$STORAGE_NETWORK_ID|g" ./cloudenv
 rm cloudenv.bak
 
 
@@ -23,7 +28,8 @@ nova boot \
 	--flavor $HOST_FLAVOR \
 	--image $BOOTIMAGE \
     --nic net-id=$MGMT_NETWORK_ID \
-    --nic net-id=$VMNET_NETWORK_ID \
+    --nic net-id=$VXLAN_NETWORK_ID \
+    --nic net-id=$STORAGE_NETWORK_ID \
 	--key-name $KEYPAIR_NAME \
 	--poll \
 	$SERVERNAME

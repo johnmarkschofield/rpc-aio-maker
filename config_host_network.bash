@@ -12,6 +12,7 @@ scp interfaces_mungerator.py root@$PUBLIC_IP:~
 scp cloudenv root@$PUBLIC_IP:~
 ssh root@$PUBLIC_IP "source /root/cloudenv ; python /root/interfaces_mungerator.py"
 
+
 ssh root@$PUBLIC_IP reboot
 set +e
 while ! ssh root@$PUBLIC_IP ls ; do sleep 5 ; done

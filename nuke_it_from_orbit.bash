@@ -41,7 +41,8 @@ while there_are_things_to_delete ; do
     if nova network-list | grep $AIONAME ; then
         echo "Deleting networks..."
         nova network-delete $MGMT_NETWORK_ID
-        nova network-delete $VMNET_NETWORK_ID
+        nova network-delete $VXLAN_NETWORK_ID
+        nova network-delete $STORAGE_NETWORK_ID
     fi
 
 done
